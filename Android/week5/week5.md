@@ -266,7 +266,6 @@ public boolean onContextItemSelected(MenuItem item){
             return super.onContextItemSelected(item);
     }
 }
-
 ```
 
 ## 컨텍스트 액션 모드
@@ -303,7 +302,6 @@ public boolean onContextItemSelected(MenuItem item){
             android:onClick="on_click"
             android:text="show popup menu"/>    
 </LinearLayout>
-
 ```
 
 **popup.xml**
@@ -335,7 +333,6 @@ public boolean onContextItemSelected(MenuItem item){
     </item>
 
 </menu>
-
 ```
 
 
@@ -368,7 +365,6 @@ public class MainActivity extends AppCompatActivity{
            }
        
    }
-
 ```
 
 ## 대화 상자
@@ -391,4 +387,75 @@ public class MainActivity extends AppCompatActivity{
 * 액션 버튼: 3개 이내의 버튼
 
 ### DatePickerDialog
-* 날짜와 시간을 입력받는 대화 상자
+* ``날짜``와 ``시간``을 입력받는 대화 상자
+
+
+## 알림 기능
+
+---
+
+``알림기능``은 어떤 이벤트가 발생하였을 때, 앱이 사용자에게 전달하는 메시지이다.
+
+### 알림을 만드는 절차
+
+1. 알림 채널 생성
+2. 알림 빌더 생성
+3. 알림 속성을 설정
+4. 액션을 첨부(선택 사항)
+5. 알림 객체 생성후 전송
+
+
+### 1. 알림 채널 생성하기
+
+```
+
+String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
+
+private void createNotificationChannel() {
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        NotificationChannel notificationChannel = new
+NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notificaitons",
+NotificationManager.IMPORTANCE_DEFAULT);
+        notificationChannel.setDescription("Channel description");
+        NotificationManager notificationManager = (NotificationManager)
+getSystemService(Context, NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel)
+    }
+}
+```
+
+### 2. 알림 빌더 생성
+
+
+```
+
+NotificationCompat.Builder builder = new NotifiactionCompat.Builder(this);=
+```
+
+### 3. 알림 속성을 설정
+
+```
+
+builder.setSmallIcon(R.drawable.notification_icon);
+builder.setContentTitle("알려드립니다.");
+builder.setContentText("이것은 시험적인 알림입니다.");
+```
+
+### 4. 액션을 첨부한다.
+
+```
+
+Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com/"));
+PendingIntent pendingIntent =
+PendingIntent.getActivity(this, 0,  Intent, 0);
+builder.setContentIntent(pendingIntent);
+```
+
+### 5. 알림 객체 생성하여 보내기
+
+```
+NotiicationManager notificationManager = (NotificationManager)getSystemService
+(NOTIFICATION_SERVICE);
+notificationManager.notify(NOTIFICAITON_ID, builder.build());
+```
