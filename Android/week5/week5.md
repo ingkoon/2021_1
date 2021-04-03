@@ -338,6 +338,8 @@ public boolean onContextItemSelected(MenuItem item){
 
 ```
 
+
+**MainActivity.java**
 ```
 
 package kr.co.company.optionmenu;
@@ -364,10 +366,29 @@ public class MainActivity extends AppCompatActivity{
                });
                popup.show();
            }
-       )
+       
    }
-
-}
 
 ```
 
+## 대화 상자
+
+---
+
+**대화상자**는 사용자에게 메시지를 출력하고 사용자로부터 입력을 받아들이는 사용자 인터페이스
+
+### 대화 상자의 종류
+
+* AlertDialog
+* ProgressDialog
+* DatePickerDialog
+* TimePickerDialog
+
+### AlertDialig
+* 제목
+* 콘텐츠 영역
+  * 메시지나 리스트, 커스텀 레이아웃을 표시한다.
+* 액션 버튼: 3개 이내의 버튼
+
+### DatePickerDialog
+* 날짜와 시간을 입력받는 대화 상자
